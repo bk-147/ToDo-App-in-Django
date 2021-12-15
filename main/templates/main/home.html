@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <style>
+        h1{
+            text-align: center;
+        }
+        body{
+            background: #000;
+            color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo Web app in DJANGO</h1>
+    <h3>Things to do :</h1>
+    <form action="/AddTask/" method ="post">{%csrf_token%}
+        <input type="text" name="content">
+        <input type="submit" value="Add Todo Item">
+
+    </form>
+    <ol>
+        {% for i in tasks %}
+           <li> {{i.task}} <br>
+               {{i.date}}
+            <form action="/deleteTodoItem/{{i.id}}/" method = "post">{% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+            <br><br><br>
+
+           </li>
+        
+        {%endfor%}
+    </ol>
+    <button type = 'button'>Submit</button>
+</body>
+</html>
